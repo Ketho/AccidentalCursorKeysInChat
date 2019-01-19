@@ -21,14 +21,13 @@ local AZERTY = "[zqsd12345]"
 local keys = GetLocale() == "frFR" and AZERTY or QWERTY
 
 local TEMP_CHAR = 'w'
-local matrix = {}
 local isInCombat
 
 -- source https://gist.github.com/Badgerati/3261142
 local function levenshtein(str1, str2)
 	local len1 = strlen(str1)
 	local len2 = strlen(str2)
-	wipe(matrix) -- reuse
+	local matrix = {}
 	local cost = 0
 	
 	-- sanitize
@@ -42,18 +41,14 @@ local function levenshtein(str1, str2)
 	
 	-- init matrix
 	for i = 0, len1 do
-		if matrix[i] then
-			wipe(matrix[i])
-		else
-			matrix[i] = {}
-		end
+		matrix[i] = {}
 		matrix[i][0] = i
 	end
 	for j = 0, len2 do
 		matrix[0][j] = j
 	end
 	
-	-- Levenshtein
+	-- levenshtein
 	for i = 1, len1 do
 		for j = 1, len2 do
 			cost = (strbyte(str1, i) == strbyte(str2, j)) and 0 or 1
@@ -61,8 +56,7 @@ local function levenshtein(str1, str2)
 		end
 	end
 	
-	-- return distance
-	return matrix[len1][len2]
+	return matrix[len1][len2] -- return distance
 end
 
 local function ChatFrameFocus(self, userInput)

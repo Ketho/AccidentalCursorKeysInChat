@@ -1,0 +1,7 @@
+## Interface: 80100
+## Version: @project-version@
+## Title: AccidentalCursorKeysInChat
+## Notes: Closes chat when the player is instead trying to move
+## Author: Ketho @ EU-Boulderfist
+
+AccidentalCursorKeysInChat.lua

@@ -59,8 +59,8 @@ local function levenshtein(str1, str2)
 	return matrix[len1][len2] -- return distance
 end
 
-local function ChatFrameFocus(self, userInput)
-	local text = self:GetText()
+local function ChatFrameFocus(frame, userInput)
+	local text = frame:GetText()
 	local str1_len = strlen(text)
 	
 	if userInput and str1_len >= MIN_LENGTH and isInCombat then
@@ -70,7 +70,7 @@ local function ChatFrameFocus(self, userInput)
 		-- if at least half of the characters are [wasd12345]
 		if levenshtein(str1, str2) < str1_len/2 then
 			-- sadly the player wont automatically move after focus is cleared
-			self:ClearFocus()
+			frame:ClearFocus()
 		end
 	end
 end

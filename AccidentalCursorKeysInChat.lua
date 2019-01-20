@@ -59,6 +59,7 @@ local function levenshtein(str1, str2)
 	return matrix[len1][len2] -- return distance
 end
 
+-- replace any wasd12345 keys to w's and compare against another string with w's
 local function ChatFrameFocus(frame, userInput)
 	local text = frame:GetText()
 	local str1_len = strlen(text)
@@ -75,7 +76,7 @@ local function ChatFrameFocus(frame, userInput)
 	end
 end
 
--- replace any wasd12345 keys to w's and compare against another string with w's
+-- hook all chat windows
 for i = 1, NUM_CHAT_WINDOWS do
 	_G["ChatFrame"..i].editBox:HookScript("OnTextChanged", ChatFrameFocus)
 end
